@@ -1,0 +1,162 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center p-4">
+  <div class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-8">
+
+  
+
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold text-gray-800">Create Account</h1>
+      <p class="text-gray-600 mt-2">Please fill in the details below to register</p>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Names Section -->
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            formControlName="firstName"
+            placeholder="Enter first name"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            [class.border-red-500]="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched"
+          />
+          <div 
+            *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched"
+            class="text-red-500 text-xs mt-1"
+          >
+            <span *ngIf="registrationForm.get('firstName')?.errors?.['required']">* First name is required</span>
+            <span *ngIf="registrationForm.get('firstName')?.errors?.['minlength']">* Must be at least 2 characters</span>
+          </div>
+        </div>
+
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            formControlName="lastName"
+            placeholder="Enter last name"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            [class.border-red-500]="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched"
+          />
+          <div 
+            *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched"
+            class="text-red-500 text-xs mt-1"
+          >
+            <span *ngIf="registrationForm.get('lastName')?.errors?.['required']">* Last name is required</span>
+            <span *ngIf="registrationForm.get('lastName')?.errors?.['minlength']">* Must be at least 2 characters</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Username Section -->
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          formControlName="username"
+          placeholder="Choose a username"
+          class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          [class.border-red-500]="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"
+        />
+        <div 
+          *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"
+          class="text-red-500 text-xs mt-1"
+        >
+          <span *ngIf="registrationForm.get('username')?.errors?.['required']">* Username is required</span>
+          <span *ngIf="registrationForm.get('username')?.errors?.['minlength']">* Must be at least 4 characters</span>
+          <span *ngIf="registrationForm.get('username')?.errors?.['forbiddenUsername']">* This username is not allowed</span>
+        </div>
+      </div>
+
+      <!-- Email Section -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email"
+          placeholder="Enter your email"
+          class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          [class.border-red-500]="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+        />
+        <div 
+          *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+          class="text-red-500 text-xs mt-1"
+        >
+          <span *ngIf="registrationForm.get('email')?.errors?.['required']">* Email is required</span>
+          <span *ngIf="registrationForm.get('email')?.errors?.['email']">* Please enter a valid email address</span>
+        </div>
+      </div>
+
+      <!-- Password Section -->
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password"
+            placeholder="Create password"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            [class.border-red-500]="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+          />
+          <div 
+            *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+            class="text-red-500 text-xs mt-1"
+          >
+            <span *ngIf="registrationForm.get('password')?.errors?.['weakPassword']">
+              * Please include uppercase, lowercase, number, and special character.
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            formControlName="confirmPassword"
+            placeholder="Confirm password"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            [class.border-red-500]="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched"
+          />
+          <div 
+            *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched"
+            class="text-red-500 text-xs mt-1"
+          >
+            <span *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">* Please confirm your password</span>
+            <span *ngIf="registrationForm.get('confirmPassword')?.errors?.['passwordMismatch']">* Passwords do not match</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Picture Section -->
+      
+      
+
+      <!-- Form Actions -->
+      <div class="mt-6">
+        <button 
+          type="submit" 
+          [disabled]="registrationForm.invalid"
+          class="w-full bg-[yellow] text-black py-3 rounded-md hover:bg-[#8B9F82]/95 transition duration-300 
+                 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Create Account
+        </button>
+        <div class="text-center mt-4 text-sm text-gray-600">
+          Already have an account? 
+          <a 
+            (click)="navigateToAuthentication()" 
+            class="text-green-600 hover:underline cursor-pointer"
+          >
+            Sign In
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
